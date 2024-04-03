@@ -55,3 +55,37 @@ ON radnik.pbrStan=mjesto.pbrMjesto
 JOIN zupanija
 ON mjesto.sifZupanija=zupanija.sifZupanija
 ORDER BY prezimeRadnik ASC;
+
+-- 11. Navedi primjer upisa BIT vrijednosti u bazu podataka! 
+INSERT INTO tablica VALUES (b'101010'); 
+
+-- 12. Iz baze dohvatiti različita imena i prezimena radnika 
+SELECT DISTINCT imeRadnik, prezimeRadnik FROM radnik;
+
+-- 13. Koristeći naredbu CREATE izraditi tablicu s tri atributa
+CREATE TABLE praznik (
+    sifPraznik INT,
+    datum DATE,
+    naziv VARCHAR(255)
+);
+ 
+-- 14. Navedi primjer naredbe za izmjenu naziva baze podataka 
+RENAME DATABASE radionica TO Nova_radionica; 
+
+-- 15. Koristeći naredbu LENGTH izradi upit iz baze podataka radionica 
+SELECT imeRadnik, prezimeRadnik FROM radnik WHERE LENGTH(prezimeRadnik) > 7;
+
+-- 16. Navedi primjer kartezijevog produkta, koristeći bazu podataka radinica 
+SELECT imeKlijent, prezimeKlijent, nazivMjesto FROM klijent, mjesto; 
+  
+-- 17. Izradi upit za pronalaženje svih mjesta u odabranoj županiji (po osobnom izboru) 
+SELECT * FROM mjesto JOIN zupanija ON mjesto.sifZupanija = zupanija.sifZupanija WHERE nazivZupanija LIKE 'Međimurska';	 
+
+-- 18. Ispisati sve naloge i sve radnike koji na njima rade
+SELECT nalog.*, imeRadnik, prezimeRadnik FROM nalog JOIN radnik ON nalog.sifRadnik = radnik.sifRadnik;
+ 
+-- 19. Navedi primjer prirodnog spoja, koristeći bazu podataka radinica
+SELECT imeKlijent, prezimeKlijent, nazivMjesto FROM klijent,mjesto WHERE klijent.pbrKlijent=mjesto.pbrMjesto;
+
+-- 20. Ispisati koliko je ukupno sati potrošeno (suma) na servisiranje vozila za sve naloge zaprimljene u svibnju 2006. godine. 
+SELECT SUM(satiKvar) FROM kvar JOIN nalog ON kvar.sifKvar=nalog.sifKvar WHERE datPrimitkaNalog LIKE '2006-05-%';
