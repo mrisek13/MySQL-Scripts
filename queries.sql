@@ -3,7 +3,7 @@ SELECT AVG(kapacitetRadnika) FROM radionica;
 
 -- 2. Ispisati sve radnike koji žive u mjestu sa poštanskim brojem između 10000 i 21000. Radnike ispisati
 -- u jednom stupcu, i to u obliku 'prezimeradnika, imeradnika' te ih sortirati po prezimenu radnika uzlazno.
-SELECT CONCAT (prezimeRadnik, ', ', imeRadnik) FROM radnik WHERE pbrStan BETWEEN 10000 AND 21000 ORDER BY prezimeRadnik ASC;
+SELECT CONCAT(prezimeRadnik, ', ', imeRadnik) FROM radnik WHERE pbrStan BETWEEN 10000 AND 21000 ORDER BY prezimeRadnik ASC;
 
 -- 3. Ispisati sve šifre klijenata koji su uneseni u tekucem mjesecu tekuce godine.
 SELECT sifKlijent FROM klijent WHERE MONTH(datUnosKlijent) = MONTH(CURRENT_DATE);
