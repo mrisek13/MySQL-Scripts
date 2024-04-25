@@ -89,3 +89,17 @@ SELECT imeKlijent, prezimeKlijent, nazivMjesto FROM klijent,mjesto WHERE klijent
 
 -- 20. Ispisati koliko je ukupno sati potrošeno (suma) na servisiranje vozila za sve naloge zaprimljene u svibnju 2006. godine. 
 SELECT SUM(satiKvar) FROM kvar JOIN nalog ON kvar.sifKvar=nalog.sifKvar WHERE datPrimitkaNalog LIKE '2006-05-%';
+
+-- Unutarnje i vanjsko spajanje tablica pomoću JOIN naredbe.
+-- Obratiti pozornost na razlike prilikom korištenja INNER JOIN, LEFT OUTER, RIGHT OUTER i FULL JOIN naredbi.
+
+-- 1. Ispisati sva mjesta koja se nalaze unutar Istarske županije kao i klijente koji žive u istima. 
+-- Ukoliko ne postoji ni jedan klijent u određenom mjestu unutar županije, potrebno je svejedno ispisati mjesto, a unutar kolona klijenta 'null' vrijednosti. 
+
+-- 2. Pomoću JOIN naredbe ispisati sve radnike iz županija čiji naziv završava sa slovom 'a'. 
+
+-- 3. Pomoću JOIN naredbe ispisati sve klijente koji su imali kvar koji je bio popravljan na odjelu 'Bojanje' 
+
+-- 4. Napisati upit po želji koji pomoću JOIN naredbe spaja više od dvije tablice u bazi podataka.
+
+-- 5. Ispisati sve odjele i kvarove koji su bili popravljani na istima, a ukoliko ne postoji ni jedan kvar koji je odjel popravljao potrebno je ispisati 'null' vrijednosti. 
