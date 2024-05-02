@@ -90,16 +90,37 @@ SELECT imeKlijent, prezimeKlijent, nazivMjesto FROM klijent,mjesto WHERE klijent
 -- 20. Ispisati koliko je ukupno sati potrošeno (suma) na servisiranje vozila za sve naloge zaprimljene u svibnju 2006. godine. 
 SELECT SUM(satiKvar) FROM kvar JOIN nalog ON kvar.sifKvar=nalog.sifKvar WHERE datPrimitkaNalog LIKE '2006-05-%';
 
--- Unutarnje i vanjsko spajanje tablica pomoću JOIN naredbe.
--- Obratiti pozornost na razlike prilikom korištenja INNER JOIN, LEFT OUTER, RIGHT OUTER i FULL JOIN naredbi.
-
--- 1. Ispisati sva mjesta koja se nalaze unutar Istarske županije kao i klijente koji žive u istima. 
+-- 21. Ispisati sva mjesta koja se nalaze unutar Istarske županije kao i klijente koji žive u istima. 
 -- Ukoliko ne postoji ni jedan klijent u određenom mjestu unutar županije, potrebno je svejedno ispisati mjesto, a unutar kolona klijenta 'null' vrijednosti. 
+SELECT m.nazivMjesto, k.imeKlijent, k.prezimeKlijent
+FROM mjesto m
+LEFT JOIN klijent k ON m.pbrMjesto = k.pbrKlijent
+LEFT JOIN zupanija z ON m.sifZupanija = z.sifZupanija
+WHERE z.nazivZupanija = 'Istarska';
 
--- 2. Pomoću JOIN naredbe ispisati sve radnike iz županija čiji naziv završava sa slovom 'a'. 
+-- 22. Pomoću JOIN naredbe ispisati sve radnike iz županija čiji naziv završava sa slovom 'a'. 
+SELECT r.*
+FROM radnik r
+JOIN odjel o ON r.sifOdjel = o.sifOdjel
+JOIN zupanija z ON o.sifNadOdjel = z.sifZupanija
+WHERE z.nazivZupanija LIKE '%a';
 
--- 3. Pomoću JOIN naredbe ispisati sve klijente koji su imali kvar koji je bio popravljan na odjelu 'Bojanje' 
+-- 23. Pomoću JOIN naredbe ispisati sve klijente koji su imali kvar koji je bio popravljan na odjelu 'Bojanje' 
+SELECT k.*
+FROM klijent k
+JOIN nalog n ON k.sifKlijent = n.sifKlijent
+JOIN kvar kv ON n.sifKvar = kv.sifKvar
+JOIN odjel o ON kv.sifOdjel = o.sifOdjel
+WHERE o.nazivOdjel = 'Bojanje';
 
--- 4. Napisati upit po želji koji pomoću JOIN naredbe spaja više od dvije tablice u bazi podataka.
+-- 24. Napisati upit po želji koji pomoću JOIN naredbe spaja više od dvije tablice u bazi podataka.
+SELECT k.imeKlijent, r.imeRadnik, kv.nazivKvar
+FROM klijent k
+JOIN nalog n ON k.sifKlijent = n.sifKlijent
+JOIN radnik r ON n.sifRadnik = r.sifRadnik
+JOIN kvar kv ON n.sifKvar = kv.sifKvar;
 
--- 5. Ispisati sve odjele i kvarove koji su bili popravljani na istima, a ukoliko ne postoji ni jedan kvar koji je odjel popravljao potrebno je ispisati 'null' vrijednosti. 
+-- 25. Ispisati sve odjele i kvarove koji su bili popravljani na istima, a ukoliko ne postoji ni jedan kvar koji je odjel popravljao potrebno je ispisati 'null' vrijednosti. 
+SELECT o.nazivOdjel, kv.nazivKvar
+FROM odjel o
+LEFT JOIN kvar kv ON o.sifOdjel = kv.sifOdjel;
